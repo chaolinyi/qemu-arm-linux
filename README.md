@@ -95,6 +95,11 @@ mount -t sysfs none /sys
 ##### Copy Driver *.ko to a new folder, memDriver
         mkdir memDrive/
         cp <path to driver files> memDriver/
+[编译驱动模块的方法]  
+1. 将目录切换到驱动文件所在目录  
+2. 执行脚本：make -C {CODE_DIR}/linux-3.10/ M=$(pwd) modules ARCH=arm   
+CROSS_COMPILE=arm-linux-gnueabi-。其中，linux-3.10是linux内核的存放路径，CROSS_COMPILE指定交叉编译工具，ARCH指定处理器架构  
+
 
 ##### Create the root filesystem image with the cpio tool.
         find . | cpio -o --format=newc > ../rootfs.img

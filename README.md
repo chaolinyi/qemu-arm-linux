@@ -34,6 +34,12 @@
   >The -j 4 option is to enable parallelism during compilation.
   >Once the Build is Complete, the linux Kernel Image for ARM architecture 
   >is saved as **zImage** under **linux-3.10/arch/arm/boot/**
+  
+[NOTE] If an error occurred during compiling, like "**arch/arm/kernel/return_address.c:66:7: error: redefinition of ‘return_address’**", you need modify the linux kernel files. Firstly, in "**arch/arm/include/asm/ftrace.h**", you need instead **extern inline void *return_address(unsigned int level)** with **static inline void *return_address(unsigned int level)**. And secondly, in "**arch/arm/kernel/return_address.c**", you need mask   
+void *return_address(unsigned int level)  
+{    
+    return NULL;  
+}  
 
 
 ## 2. Compiling BusyBox from source for ARM architecture
